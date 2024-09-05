@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Records {% endblock %}</h1>
+    <div class="content">
+        {% for post in posts %}
+            <div class="card">
+                <p><b>#{{ post.id }}</b></p>
+
+                {% for key, value in post.data.items() %}
+                    <p><b>{{ key }}</b> : {{ value }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

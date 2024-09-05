@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14.0
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: my_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+    
+
+  flask:
+    build: ./app
+    container_name: flask-app
+    environment:
+      DB_URI: postgresql+psycopg://postgres:postgres@postgres/my_db
+      KEY: supersecretkey
+    depends_on:
+      - postgres
+    restart: on-failure
+    ports:
+      - "5050:5000"
+    command: python3 src/main.py
+    volumes:
+      - ./app:/app
+
+volumes:
+  postgres_data:
