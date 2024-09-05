@@ -30,7 +30,7 @@ services:
       - postgres
     restart: on-failure
     ports:
-      - "5050:5000"
+      - "5000:5000"
     command: python3 src/main.py
     volumes:
       - ./app:/app
