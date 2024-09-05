@@ -1,5 +1,9 @@
 # Запуск
-- клонируем репозитрий (https://github.com/ImanSheyma/eyrj36)
+- клонируем репозитрий и переходим в директорию проекта
+```
+git clone https://github.com/ImanSheyma/eyrj36
+cd eyrj36
+```
 - "поднимаем" сервисы командой: 
 ```
   docker compose up
